@@ -1,11 +1,17 @@
-import express from 'express';
-const app = express();
-const port = 3000;
+import express from "express";
+import { AppModule } from "./app.module";
+// const app = express();
+// const port = 4200;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+// app.get('/api', (req, res) => {
+//     console.log('server being hit');
+//   res.send('Hello from server!');
+// });
 
-app.listen(port, () => {
-  return console.log(`Express is listening at http://localhost:${port}`);
-});
+import { NestFactory } from "@nestjs/core";
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  await app.listen(process.env.PORT ?? 4200);
+}
+bootstrap();
